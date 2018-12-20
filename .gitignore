@@ -1,0 +1,14 @@
+.idea/libraries/
+.idea/workspace.xml
+.idea/uiDesigner.xml
+.idea/compiler.xml
+/.idea/abyss-sql-builder.iml
+/.idea/encodings.xml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/vcs.xml
+/abyss-sql-builder.iml
+target/
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/compiler.xml
+/.idea/abyss-logger.iml
