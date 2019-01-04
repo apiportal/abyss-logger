@@ -12,3 +12,4 @@ target/
 /.idea/inspectionProfiles/Project_Default.xml
 /.idea/compiler.xml
 /.idea/abyss-logger.iml
+/abyss-logger.iml
