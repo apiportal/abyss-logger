@@ -2,6 +2,7 @@ package com.verapi.abyss.logger.handler.rx;
 
 import io.vertx.core.Handler;
 import io.vertx.reactivex.ext.web.RoutingContext;
+import io.vertx.lang.rx.TypeArg;
 
 public class LoggerHandler implements Handler<RoutingContext> {
 
@@ -23,7 +24,7 @@ public class LoggerHandler implements Handler<RoutingContext> {
         return delegate.hashCode();
     }
 
-    public static final io.vertx.lang.reactivex.TypeArg<LoggerHandler> __TYPE_ARG = new io.vertx.lang.reactivex.TypeArg<>(
+    public static final TypeArg<LoggerHandler> __TYPE_ARG = new TypeArg<>(
             obj -> new LoggerHandler((com.verapi.abyss.logger.handler.LoggerHandler) obj),
             LoggerHandler::getDelegate
     );

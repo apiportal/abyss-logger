@@ -59,7 +59,7 @@ public class LoggerHandlerImpl implements LoggerHandler {
     }
 
     private void log(RoutingContext routingContext, JsonObject message) {
-        logger.error("Abyss LoggerHandler>>{}",packMessage(routingContext, message).encodePrettily());
+        logger.info("Abyss LoggerHandler>>{}",packMessage(routingContext, message).encodePrettily());
     }
 
     private JsonObject packMessage(RoutingContext routingContext, JsonObject message) {
