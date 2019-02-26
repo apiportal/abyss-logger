@@ -97,6 +97,11 @@
             <groupId>io.vertx</groupId>
             <artifactId>vertx-rx-gen</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.verapi.abyss</groupId>
+            <artifactId>abyss-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>
