@@ -56,7 +56,9 @@ public class LoggerHandlerImpl implements LoggerHandler {
         long bytesRead = routingContext.request().bytesRead();
         long bytesSent = routingContext.response().bytesWritten();
         int statusCode = routingContext.response().getStatusCode();
-        String username = routingContext.user() != null ? routingContext.user().principal().getString("username") : "";
+        //String username = routingContext.user() != null ? routingContext.user().principal().getString("username") : "";
+        String username = (routingContext.session() != null && routingContext.session().get(Constants.AUTH_ABYSS_PORTAL_USER_NAME_SESSION_VARIABLE_NAME) != null)
+                ? routingContext.session().get(Constants.AUTH_ABYSS_PORTAL_USER_NAME_SESSION_VARIABLE_NAME) : "";
 
         JsonObject message = new JsonObject()
                 .put(ApiTraffic.ID, uuid.toString())
