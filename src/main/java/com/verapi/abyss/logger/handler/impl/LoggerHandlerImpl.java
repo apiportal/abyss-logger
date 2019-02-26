@@ -53,8 +53,6 @@ public class LoggerHandlerImpl implements LoggerHandler {
                 ? routingContext.request().host().substring(0, routingContext.request().host().indexOf(":"))
                 : routingContext.request().host();
         int localPort = routingContext.request().localAddress().port();
-        long bytesRead = routingContext.request().bytesRead();
-        long bytesSent = routingContext.response().bytesWritten();
         int statusCode = routingContext.response().getStatusCode();
         //String username = routingContext.user() != null ? routingContext.user().principal().getString("username") : "";
         String username = (routingContext.session() != null && routingContext.session().get(Constants.AUTH_ABYSS_PORTAL_USER_NAME_SESSION_VARIABLE_NAME) != null)
@@ -66,8 +64,6 @@ public class LoggerHandlerImpl implements LoggerHandler {
                 .put(ApiTraffic.HTTP_SESSION, session)
                 .put(ApiTraffic.HTTP_VERSION, version)
                 .put(ApiTraffic.REMOTE_CLIENT, remoteClient)
-                .put(ApiTraffic.REQUEST_BODY, routingContext.getBodyAsString())
-                .put(ApiTraffic.REQUEST_BYTES_READ, bytesRead)
                 .put(ApiTraffic.REQUEST_HOST, localHost)
                 .put(ApiTraffic.REQUEST_IS_SSL, isSSL)
                 .put(ApiTraffic.REQUEST_PATH, path)
@@ -76,7 +72,6 @@ public class LoggerHandlerImpl implements LoggerHandler {
                 .put(ApiTraffic.REQUEST_SCHEME, scheme)
                 .put(ApiTraffic.REQUEST_URI, uri)
                 .put(ApiTraffic.RESPONSE_BODY, "") //TODO: put response body
-                .put(ApiTraffic.RESPONSE_BYTES_WRITTEN, bytesSent)
                 .put(ApiTraffic.RESPONSE_STATUS_CODE, statusCode)
                 .put(ApiTraffic.TIMESTAMP, Instant.now())
                 .put(ApiTraffic.USERNAME, username);
@@ -116,11 +111,15 @@ public class LoggerHandlerImpl implements LoggerHandler {
         } else {
             contentLength = routingContext.request().response().bytesWritten();
         }
-        final MultiMap headers = routingContext.request().headers();
-        String referer = headers.contains(HttpHeaders.REFERER) ? headers.get(HttpHeaders.REFERER) : "";
-        String userAgent = headers.get(HttpHeaders.USER_AGENT);
-        String acceptEncoding = headers.get(HttpHeaders.ACCEPT_ENCODING);
-        String contentType = headers.get(HttpHeaders.CONTENT_TYPE);
+        final MultiMap requestHeaders = routingContext.request().headers();
+        final MultiMap responseHeaders = routingContext.response().headers();
+        String referer = requestHeaders.contains(HttpHeaders.REFERER) ? requestHeaders.get(HttpHeaders.REFERER) : "";
+        String userAgent = requestHeaders.get(HttpHeaders.USER_AGENT);
+        String acceptEncoding = requestHeaders.get(HttpHeaders.ACCEPT_ENCODING);
+        String contentType = responseHeaders.get(HttpHeaders.CONTENT_TYPE);
+        long bytesRead = routingContext.request().bytesRead();
+        long bytesSent = routingContext.response().bytesWritten();
+
 
         return message
                 .put(ApiTraffic.ACCEPT_ENCODING, acceptEncoding)
@@ -131,7 +130,10 @@ public class LoggerHandlerImpl implements LoggerHandler {
                 .put(ApiTraffic.REQUEST_HEADERS, extractHeaders(routingContext.request().headers()))
                 .put(ApiTraffic.REQUEST_PARAMS, extractParams(routingContext.request().params()))
                 .put(ApiTraffic.RESPONSE_HEADERS, extractHeaders(routingContext.response().headers()))
-                .put(ApiTraffic.USER_AGENT, userAgent);
+                .put(ApiTraffic.USER_AGENT, userAgent)
+                .put(ApiTraffic.REQUEST_BYTES_READ, bytesRead)
+                .put(ApiTraffic.RESPONSE_BYTES_WRITTEN, bytesSent)
+                .put(ApiTraffic.REQUEST_BODY, routingContext.getBodyAsString());
     }
 
 
