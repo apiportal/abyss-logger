@@ -37,7 +37,6 @@ public class LoggerHandlerImpl implements LoggerHandler {
 
     @Override
     public void handle(RoutingContext routingContext) {
-        logger.warn("loggerhandler.handle starting...");
         // common logging data
         UUID uuid = UUID.randomUUID();
         String remoteClient = getClientAddress(routingContext.request().remoteAddress());
