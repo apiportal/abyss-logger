@@ -39,6 +39,8 @@ public class LoggerHandlerImpl implements LoggerHandler {
     public void handle(RoutingContext routingContext) {
         // common logging data
         UUID uuid = UUID.randomUUID();
+        routingContext.data().put("correlation-id", uuid.toString());
+
         String remoteClient = getClientAddress(routingContext.request().remoteAddress());
         HttpMethod method = routingContext.request().method();
         String session = routingContext.session() != null ? routingContext.session().id() : "";
@@ -70,7 +72,6 @@ public class LoggerHandlerImpl implements LoggerHandler {
                 .put(ApiTraffic.REQUEST_QUERY, query)
                 .put(ApiTraffic.REQUEST_SCHEME, scheme)
                 .put(ApiTraffic.REQUEST_URI, uri)
-                .put(ApiTraffic.RESPONSE_BODY, "") //TODO: put response body
                 .put(ApiTraffic.RESPONSE_STATUS_CODE, statusCode)
                 .put(ApiTraffic.TIMESTAMP, Instant.now())
                 .put(ApiTraffic.USERNAME, username);
@@ -118,7 +119,7 @@ public class LoggerHandlerImpl implements LoggerHandler {
         String contentType = responseHeaders.get(HttpHeaders.CONTENT_TYPE);
         long bytesRead = routingContext.request().bytesRead();
         long bytesSent = routingContext.response().bytesWritten();
-
+        String corrId = routingContext.data().get("correlation-id") != null ? routingContext.data().get("correlation-id").toString() : "";
 
         return message
                 .put(ApiTraffic.ACCEPT_ENCODING, acceptEncoding)
@@ -132,7 +133,8 @@ public class LoggerHandlerImpl implements LoggerHandler {
                 .put(ApiTraffic.USER_AGENT, userAgent)
                 .put(ApiTraffic.REQUEST_BYTES_READ, bytesRead)
                 .put(ApiTraffic.RESPONSE_BYTES_WRITTEN, bytesSent)
-                .put(ApiTraffic.REQUEST_BODY, routingContext.getBodyAsString());
+                .put(ApiTraffic.REQUEST_BODY, routingContext.getBodyAsString())
+                .put(ApiTraffic.RESPONSE_BODY, corrId); //TODO: put response body;
     }
 
 
