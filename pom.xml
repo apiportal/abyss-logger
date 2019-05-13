@@ -6,70 +6,43 @@
 
     <parent>
         <groupId>com.verapi.abyss</groupId>
-        <artifactId>abyss</artifactId>
+        <artifactId>abyss-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../abyss/pom.xml</relativePath>
+        <relativePath/>
     </parent>
 
     <artifactId>abyss-logger</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Verapi Abyss Logger</name>
-    <description>Verapi Abyss Logger Project</description>
+    <name>Abyss Logger</name>
+    <description>Abyss Logger Project</description>
     <url>https://apiportal.com</url>
 
-    <organization>
-        <name>Verapi Software Technologies</name>
-        <url>https://verapi.com</url>
-    </organization>
 
-    <licenses>
-        <license>
-            <name>Verapi License Version 1.0</name>
-            <url>https://verapi.com/licenses/VPL-1.0.txt</url>
-            <distribution>manual</distribution>
-        </license>
-    </licenses>
-
-    <developers>
-        <developer>
-            <name>Halil ÖZKAN</name>
-            <id>halil.ozkan</id>
-            <email>halil.ozkan@verapi.com</email>
-            <url>https://www.linkedin.com/in/halil-%C3%B6zkan-796bbb2/</url>
-            <organization>Verapi</organization>
-            <roles>
-                <role>Enterprise Architect</role>
-            </roles>
-            <timezone>+3</timezone>
-        </developer>
-        <developer>
-            <name>İsmet Faik SAĞLAR</name>
-            <id>faik.saglar</id>
-            <email>faik.saglar@verapi.com</email>
-            <url>https://www.linkedin.com/in/ismet-faik-saglar-a799587/</url>
-            <organization>Verapi</organization>
-            <roles>
-                <role>Software Architect</role>
-            </roles>
-            <timezone>+3</timezone>
-        </developer>
-    </developers>
+    <scm>
+        <url>https://github.com/apiportal/abyss-logger</url>
+        <connection>scm:git:https://github.com/apiportal/abyss-logger.git</connection>
+        <developerConnection>scm:git:https://github.com/apiportal/abyss-logger.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
 
     <issueManagement>
-        <system>jira</system>
-        <url>https://jira.verapi.com:18443</url>
+        <system>GitHub Issues</system>
+        <url>https://github.com/apiportal/abyss-logger/issues</url>
     </issueManagement>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <ciManagement>
+        <system>Travis CI</system>
+        <url>https://travis-ci.org/apiportal/abyss-logger</url>
+    </ciManagement>
 
-    <dependencyManagement>
-        <dependencies>
-        </dependencies>
-    </dependencyManagement>
+    <distributionManagement>
+        <site>
+            <id>site</id>
+            <url>scm:git:https://github.com/apiportal/abyss-logger.git</url>
+        </site>
+    </distributionManagement>
 
     <dependencies>
         <dependency>

@@ -13,3 +13,4 @@ target/
 /.idea/compiler.xml
 /.idea/abyss-logger.iml
 /abyss-logger.iml
+/.idea
