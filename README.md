@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/apiportal/abyss-logger.svg?branch=master)](https://travis-ci.org/apiportal/abyss-logger)
-# Abyss Common
+# Abyss Logger
 
 This is the repository for Abyss Logger 
 
